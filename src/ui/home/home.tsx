@@ -2,25 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Card } from "../../components/card";
-
-const board = [
-  "D",
-  "F",
-  "G",
-  "A",
-  "E",
-  "H",
-  "C",
-  "B",
-  "F",
-  "D",
-  "A",
-  "E",
-  "C",
-  "B",
-  "G",
-  "H",
-];
+import { shuffledBoard } from "./game-board";
 
 export const Home = () => {
   const [firstCard, setFirstCard] = useState<number | null>(null);
@@ -32,7 +14,7 @@ export const Home = () => {
       return;
     }
 
-    if (board[firstCard] === board[secondCard]) {
+    if (shuffledBoard[firstCard] === shuffledBoard[secondCard]) {
       setRevealed((currentRevealedList) => [
         ...currentRevealedList,
         firstCard,
@@ -62,7 +44,7 @@ export const Home = () => {
     <Container>
       <Header>Memory game</Header>
       <GameBoard>
-        {board.map((letter, index) => (
+        {shuffledBoard.map((letter, index) => (
           <Card
             revealed={
               index === firstCard ||

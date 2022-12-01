@@ -3,6 +3,27 @@ import userEvent from "@testing-library/user-event";
 
 import { Home } from "./home";
 
+jest.mock("./game-board", () => ({
+  shuffledBoard: [
+    "G",
+    "A",
+    "A",
+    "B",
+    "F",
+    "H",
+    "B",
+    "D",
+    "H",
+    "F",
+    "E",
+    "G",
+    "C",
+    "E",
+    "C",
+    "D",
+  ],
+}));
+
 describe("Home page", () => {
   it("should render the header", () => {
     const { getByRole } = render(<Home />);
@@ -35,12 +56,12 @@ describe("Home page", () => {
     const { getAllByTestId, queryAllByText } = render(<Home />);
 
     const cardOne = getAllByTestId("card")[5];
-    const cardTwo = getAllByTestId("card")[15];
+    const cardTwo = getAllByTestId("card")[8];
 
     await user.click(cardOne);
     await user.click(cardTwo);
 
-    expect(queryAllByText(/H/)).toHaveLength(2);
+    expect(queryAllByText("H")).toHaveLength(2);
   });
 
   it("should hide the cards if match not found", async () => {
