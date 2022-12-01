@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Card } from "../../components/card";
@@ -22,12 +23,57 @@ const board = [
 ];
 
 export const Home = () => {
+  const [firstCard, setFirstCard] = useState<number | null>(null);
+  const [secondCard, setSecondCard] = useState<number | null>(null);
+  const [revealed, setRevealed] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (firstCard === null || secondCard === null) {
+      return;
+    }
+
+    if (board[firstCard] === board[secondCard]) {
+      setRevealed((currentRevealedList) => [
+        ...currentRevealedList,
+        firstCard,
+        secondCard,
+      ]);
+
+      setFirstCard(null);
+      setSecondCard(null);
+      return;
+    }
+
+    setTimeout(() => {
+      setFirstCard(null);
+      setSecondCard(null);
+    }, 800);
+  }, [firstCard, secondCard]);
+
+  const onCardClicked = (id: number) => {
+    if (firstCard === null) {
+      setFirstCard(id);
+    } else {
+      setSecondCard(id);
+    }
+  };
+
   return (
     <Container>
       <Header>Memory game</Header>
       <GameBoard>
         {board.map((letter, index) => (
-          <Card id={letter} key={index} />
+          <Card
+            revealed={
+              index === firstCard ||
+              index === secondCard ||
+              revealed.includes(index)
+            }
+            id={index}
+            value={letter}
+            key={index}
+            onClickHandler={onCardClicked}
+          />
         ))}
       </GameBoard>
     </Container>

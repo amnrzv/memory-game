@@ -2,21 +2,22 @@ import { useState } from "react";
 import styled from "styled-components";
 
 interface CardProps {
-  id: string;
+  id: number;
+  value: string;
+  revealed: boolean;
+  onClickHandler: (id: number) => void;
 }
 
-export const Card = ({ id }: CardProps) => {
-  const [revealed, setRevealed] = useState(false);
-
+export const Card = ({ id, value, revealed, onClickHandler }: CardProps) => {
   return (
     <CardWrapper
       data-testid="card"
       tabIndex={0}
-      onClick={() =>
-        setRevealed((currentRevealedState) => !currentRevealedState)
-      }
+      onClick={() => {
+        onClickHandler(id);
+      }}
     >
-      {revealed ? id : ""}
+      {revealed ? value : ""}
     </CardWrapper>
   );
 };
