@@ -44,7 +44,7 @@ export const Home = () => {
     <Container>
       <Header>Memory game</Header>
       <GameBoard>
-        {shuffledBoard.map((letter, index) => (
+        {shuffledBoard.map((value, index) => (
           <Card
             revealed={
               index === firstCard ||
@@ -52,7 +52,7 @@ export const Home = () => {
               revealed.includes(index)
             }
             id={index}
-            value={letter}
+            value={value.toString()}
             key={index}
             onClickHandler={onCardClicked}
           />

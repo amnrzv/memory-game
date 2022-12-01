@@ -4,24 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { Home } from "./home";
 
 jest.mock("./game-board", () => ({
-  shuffledBoard: [
-    "G",
-    "A",
-    "A",
-    "B",
-    "F",
-    "H",
-    "B",
-    "D",
-    "H",
-    "F",
-    "E",
-    "G",
-    "C",
-    "E",
-    "C",
-    "D",
-  ],
+  shuffledBoard: [5, 4, 2, 2, 1, 5, 0, 3, 3, 7, 6, 6, 0, 1, 7, 4],
 }));
 
 describe("Home page", () => {
@@ -43,11 +26,11 @@ describe("Home page", () => {
     const user = userEvent.setup();
     const { getAllByTestId, queryByText } = render(<Home />);
 
-    expect(queryByText(/[A-H]/)).toBeNull();
+    expect(queryByText(/[0-7]/)).toBeNull();
     const card = getAllByTestId("card")[5];
 
     await user.click(card);
-    expect(queryByText(/[A-H]/)).not.toBeNull();
+    expect(queryByText(/[0-7]/)).not.toBeNull();
   });
 
   it("should keep the cards revealed if match found", async () => {
@@ -55,13 +38,13 @@ describe("Home page", () => {
 
     const { getAllByTestId, queryAllByText } = render(<Home />);
 
-    const cardOne = getAllByTestId("card")[5];
-    const cardTwo = getAllByTestId("card")[8];
+    const cardOne = getAllByTestId("card")[6];
+    const cardTwo = getAllByTestId("card")[12];
 
     await user.click(cardOne);
     await user.click(cardTwo);
 
-    expect(queryAllByText("H")).toHaveLength(2);
+    expect(queryAllByText("0")).toHaveLength(2);
   });
 
   it("should hide the cards if match not found", async () => {
@@ -75,6 +58,6 @@ describe("Home page", () => {
     await user.click(cardOne);
     await user.click(cardTwo);
 
-    await waitFor(() => expect(queryAllByText(/[A-H]/)).toHaveLength(0));
+    await waitFor(() => expect(queryAllByText(/[0-7]/)).toHaveLength(0));
   });
 });
