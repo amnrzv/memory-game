@@ -35,7 +35,7 @@ export const Home = ({ catImages, board }: HomeProps) => {
       setFirstCard(null);
       setSecondCard(null);
     }, 800);
-  }, [firstCard, secondCard]);
+  }, [board, firstCard, secondCard]);
 
   const onCardClicked = (id: number) => {
     if (firstCard === null) {
