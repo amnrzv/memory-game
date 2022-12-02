@@ -37,8 +37,7 @@ export const Card = ({
 
 const CardSlot = styled.button`
   font-size: 3rem;
-  height: 10rem;
-  width: calc(100vw / 4 - 4rem);
+  height: 18vh;
   padding: 0;
   cursor: pointer;
   border: solid 1px coral;
@@ -47,15 +46,14 @@ const CardSlot = styled.button`
   background: #ffc0cb09;
 
   :hover,
-  :focus {
+  :focus-visible {
     box-shadow: 0 0 10px 0px coral;
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 `;
 
 const EmptyCardSlot = styled.div`
-  height: 10rem;
-  width: calc(100vw / 4 - 4rem);
+  height: 18vh;
   border: solid 1px #6c595992;
 `;
 

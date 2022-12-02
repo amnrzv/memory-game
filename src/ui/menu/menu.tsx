@@ -5,7 +5,9 @@ export const Menu = () => {
   return (
     <Container>
       <Header>Catssss</Header>
-      <Info>Flip the cards and find the matching pairs</Info>
+      <Info>
+        Flip the cards and find all the matching pairs in the fewest turns
+      </Info>
       <StartLink href={"/game"}>START</StartLink>
     </Container>
   );

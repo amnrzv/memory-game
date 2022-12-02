@@ -12,7 +12,9 @@ describe("Menu page", () => {
     const { getByText } = render(<Menu />);
 
     expect(
-      getByText("Flip the cards and find the matching pairs")
+      getByText(
+        "Flip the cards and find all the matching pairs in the fewest turns"
+      )
     ).toBeVisible();
   });
 
