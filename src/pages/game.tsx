@@ -1,8 +1,8 @@
 import { GetServerSideProps } from "next";
 
-import { shuffledBoard } from "../ui/home/game-board";
-import { Home, Image } from "../ui/home";
-export default Home;
+import { shuffledBoard } from "../ui/game/game-board";
+import { Game, Image } from "../ui/game";
+export default Game;
 
 export const getServerSideProps: GetServerSideProps<{
   catImages: Image[];

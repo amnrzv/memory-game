@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Card } from "../../components/card";
-import { Image } from "./home.interface";
+import { Image } from "./game.interface";
 
-interface HomeProps {
+interface GameProps {
   catImages: Image[];
   board: number[];
 }
 
-export const Home = ({ catImages, board }: HomeProps) => {
+export const Game = ({ catImages, board }: GameProps) => {
   const [firstCard, setFirstCard] = useState<number | null>(null);
   const [secondCard, setSecondCard] = useState<number | null>(null);
   const [revealedList, setRevealed] = useState<number[]>([]);
