@@ -65,6 +65,9 @@ interface CardWrapperProps {
 }
 
 const CardWrapper = styled.div<CardWrapperProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   height: 100%;
   width: 100%;
