@@ -5,12 +5,14 @@ import styled from "styled-components";
 import { Card } from "../../components/card";
 import { Image } from "./game.interface";
 
+const DELAY_BEFORE_REMOVE_IN_MS = 600;
+const DELAY_BEFORE_FLIP_BACK_IN_MS = 300;
+
 interface GameProps {
   catImages: Image[];
   board: number[];
 }
 
-const CARD_FLIP_DELAY_IN_MS = 600;
 export const Game = ({ catImages, board }: GameProps) => {
   const [pairsFlipped, setPairsFlipped] = useState(0);
   const [firstCard, setFirstCard] = useState<number | null>(null);
@@ -18,6 +20,7 @@ export const Game = ({ catImages, board }: GameProps) => {
   const [revealedList, setRevealed] = useState<number[]>([]);
 
   const router = useRouter();
+  const isGameOver = revealedList.length === board.length;
 
   useEffect(() => {
     if (firstCard === null || secondCard === null) {
@@ -33,17 +36,21 @@ export const Game = ({ catImages, board }: GameProps) => {
         ]);
         setFirstCard(null);
         setSecondCard(null);
-      }, CARD_FLIP_DELAY_IN_MS);
+      }, DELAY_BEFORE_REMOVE_IN_MS);
       return;
     }
 
     setTimeout(() => {
       setFirstCard(null);
       setSecondCard(null);
-    }, CARD_FLIP_DELAY_IN_MS);
+    }, DELAY_BEFORE_FLIP_BACK_IN_MS);
   }, [board, firstCard, secondCard]);
 
   const onCardClicked = (id: number) => {
+    if (firstCard !== null && secondCard !== null) {
+      return;
+    }
+
     if (firstCard === null) {
       setFirstCard(id);
     } else {
@@ -68,7 +75,8 @@ export const Game = ({ catImages, board }: GameProps) => {
         ))}
       </GameBoard>
       <ScoreBoard>PAIRS FLIPPED: {pairsFlipped}</ScoreBoard>
-      {revealedList.length === board.length ? (
+
+      {isGameOver ? (
         <RestartButton onClick={() => router.reload()}>
           Restart game
         </RestartButton>
