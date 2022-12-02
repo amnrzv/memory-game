@@ -53,7 +53,7 @@ export const Game = ({ catImages, board }: GameProps) => {
 
     if (firstCard === null) {
       setFirstCard(id);
-    } else {
+    } else if (id !== firstCard) {
       setPairsFlipped((turns) => turns + 1);
       setSecondCard(id);
     }

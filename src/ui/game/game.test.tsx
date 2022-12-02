@@ -50,6 +50,25 @@ describe("Game page", () => {
     });
   });
 
+  it("should not allow the user to select the same card on the second flip", async () => {
+    const user = userEvent.setup();
+
+    const { getByText, getAllByTestId, queryAllByText } = render(
+      <Game catImages={[]} board={shuffledBoard} />
+    );
+
+    const cardOne = getAllByTestId("card-slot")[5];
+    const cardTwo = getAllByTestId("card-slot")[5];
+
+    await user.click(cardOne);
+    await user.click(cardTwo);
+
+    await waitFor(() => {
+      expect(queryAllByText(/^[0-7]$/)).toHaveLength(1);
+      expect(getByText("PAIRS FLIPPED: 0")).toBeVisible();
+    });
+  });
+
   it("should hide the cards if match not found", async () => {
     const user = userEvent.setup();
 
@@ -109,7 +128,7 @@ describe("Game page", () => {
     await new Promise((resolve) =>
       setTimeout(() => {
         resolve(true);
-      }, 601)
+      }, 650)
     );
 
     act(() => {
