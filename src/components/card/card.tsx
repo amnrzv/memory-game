@@ -22,28 +22,26 @@ export const Card = ({
   }
 
   return (
-    <CardSlot>
-      <CardWrapper
-        data-testid="card"
-        tabIndex={0}
-        onClick={() => {
-          onClickHandler(id);
-        }}
-        imgUrl={imgUrl}
-        isFlipped={isFlipped}
-      >
+    <CardSlot
+      data-testid="card-slot"
+      onClick={() => {
+        onClickHandler(id);
+      }}
+    >
+      <CardWrapper imgUrl={imgUrl} isFlipped={isFlipped}>
         {isFlipped ? <CardText>{value}</CardText> : null}
       </CardWrapper>
     </CardSlot>
   );
 };
 
-const CardSlot = styled.div`
+const CardSlot = styled.button`
   font-size: 3rem;
   height: 10rem;
   width: calc(100vw / 4 - 4rem);
-  border: solid 1px coral;
+  padding: 0;
   cursor: pointer;
+  border: solid 1px coral;
   overflow: hidden;
 
   background: #ffc0cb09;
