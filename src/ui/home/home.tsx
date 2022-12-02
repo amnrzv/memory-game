@@ -2,19 +2,24 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Card } from "../../components/card";
-import { shuffledBoard } from "./game-board";
+import { Image } from "./home.interface";
 
-export const Home = () => {
+interface HomeProps {
+  catImages: Image[];
+  board: number[];
+}
+
+export const Home = ({ catImages, board }: HomeProps) => {
   const [firstCard, setFirstCard] = useState<number | null>(null);
   const [secondCard, setSecondCard] = useState<number | null>(null);
-  const [revealed, setRevealed] = useState<number[]>([]);
+  const [revealedList, setRevealed] = useState<number[]>([]);
 
   useEffect(() => {
     if (firstCard === null || secondCard === null) {
       return;
     }
 
-    if (shuffledBoard[firstCard] === shuffledBoard[secondCard]) {
+    if (board[firstCard] === board[secondCard]) {
       setRevealed((currentRevealedList) => [
         ...currentRevealedList,
         firstCard,
@@ -44,14 +49,15 @@ export const Home = () => {
     <Container>
       <Header>Memory game</Header>
       <GameBoard>
-        {shuffledBoard.map((value, index) => (
+        {board.map((value, index) => (
           <Card
-            revealed={
+            isRevealed={
               index === firstCard ||
               index === secondCard ||
-              revealed.includes(index)
+              revealedList.includes(index)
             }
             id={index}
+            imgUrl={catImages.length > value ? catImages[value].url : ""}
             value={value.toString()}
             key={index}
             onClickHandler={onCardClicked}

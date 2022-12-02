@@ -1,14 +1,34 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 interface CardProps {
   id: number;
+  imgUrl?: string;
   value: string;
-  revealed: boolean;
+  isRevealed: boolean;
   onClickHandler: (id: number) => void;
 }
 
-export const Card = ({ id, value, revealed, onClickHandler }: CardProps) => {
+const renderImageOrBackupText = (
+  isRevealed: boolean,
+  value: string,
+  imgUrl?: string
+) => {
+  if (!imgUrl && isRevealed) {
+    return <CardText>{value}</CardText>;
+  }
+
+  return (
+    <CardImage src={imgUrl} alt={`cat ${value}`} isRevealed={isRevealed} />
+  );
+};
+
+export const Card = ({
+  id,
+  imgUrl,
+  value,
+  isRevealed,
+  onClickHandler,
+}: CardProps) => {
   return (
     <CardWrapper
       data-testid="card"
@@ -17,7 +37,7 @@ export const Card = ({ id, value, revealed, onClickHandler }: CardProps) => {
         onClickHandler(id);
       }}
     >
-      {revealed ? value : ""}
+      {renderImageOrBackupText(isRevealed, value, imgUrl)}
     </CardWrapper>
   );
 };
@@ -28,8 +48,10 @@ const CardWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 10rem;
+  width: calc(100vw / 4 - 4rem);
   border: solid 2px coral;
   cursor: pointer;
+  overflow: hidden;
 
   :hover,
   :focus {
@@ -37,3 +59,13 @@ const CardWrapper = styled.div`
     transform: scale(1.05);
   }
 `;
+
+const CardImage = styled.img<{ isRevealed: boolean }>`
+  height: 100%;
+
+  // to kick off image loading immediately
+  // instead of loading on reveal
+  opacity: ${({ isRevealed }) => (isRevealed ? 1 : 0)};
+`;
+
+const CardText = styled.div``;

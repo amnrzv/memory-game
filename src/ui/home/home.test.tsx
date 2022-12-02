@@ -3,13 +3,11 @@ import userEvent from "@testing-library/user-event";
 
 import { Home } from "./home";
 
-jest.mock("./game-board", () => ({
-  shuffledBoard: [5, 4, 2, 2, 1, 5, 0, 3, 3, 7, 6, 6, 0, 1, 7, 4],
-}));
+const shuffledBoard = [5, 4, 2, 2, 1, 5, 0, 3, 3, 7, 6, 6, 0, 1, 7, 4];
 
 describe("Home page", () => {
   it("should render the header", () => {
-    const { getByRole } = render(<Home />);
+    const { getByRole } = render(<Home catImages={[]} board={shuffledBoard} />);
 
     expect(getByRole("heading", { level: 1 })).toHaveTextContent(
       /memory game/i
@@ -17,14 +15,18 @@ describe("Home page", () => {
   });
 
   it("should render the cards", () => {
-    const { getAllByTestId } = render(<Home />);
+    const { getAllByTestId } = render(
+      <Home catImages={[]} board={shuffledBoard} />
+    );
 
     expect(getAllByTestId("card")).toHaveLength(16);
   });
 
   it("should reveal the card content on clicking", async () => {
     const user = userEvent.setup();
-    const { getAllByTestId, queryByText } = render(<Home />);
+    const { getAllByTestId, queryByText } = render(
+      <Home catImages={[]} board={shuffledBoard} />
+    );
 
     expect(queryByText(/[0-7]/)).toBeNull();
     const card = getAllByTestId("card")[5];
@@ -36,7 +38,9 @@ describe("Home page", () => {
   it("should keep the cards revealed if match found", async () => {
     const user = userEvent.setup();
 
-    const { getAllByTestId, queryAllByText } = render(<Home />);
+    const { getAllByTestId, queryAllByText } = render(
+      <Home catImages={[]} board={shuffledBoard} />
+    );
 
     const cardOne = getAllByTestId("card")[6];
     const cardTwo = getAllByTestId("card")[12];
@@ -50,7 +54,9 @@ describe("Home page", () => {
   it("should hide the cards if match not found", async () => {
     const user = userEvent.setup();
 
-    const { getAllByTestId, queryAllByText } = render(<Home />);
+    const { getAllByTestId, queryAllByText } = render(
+      <Home catImages={[]} board={shuffledBoard} />
+    );
 
     const cardOne = getAllByTestId("card")[5];
     const cardTwo = getAllByTestId("card")[10];
