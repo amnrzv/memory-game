@@ -137,7 +137,7 @@ describe("Game page", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText("Restart game")).toBeVisible();
+      expect(screen.getByText("PLAY AGAIN?")).toBeVisible();
     });
   });
 });

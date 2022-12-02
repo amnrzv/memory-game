@@ -24,3 +24,15 @@ a {
     background: #100912;
   }
 }
+
+:root {
+  --theme-colour: hsl(16 100% 66%);
+  --theme-colour-bg: hsl(16, 22%, 9%);
+  --empty-card-border: hsl(16, 22%, 60%, 0.5);
+  --text-color: hsl(17, 49%, 80%);
+  --text-color-hover: hsl(17, 79%, 90%);
+  --btn-bg: hsl(16, 56%, 35%);
+  --border-radius: 1rem;
+
+  --card-height: 18vh;
+}

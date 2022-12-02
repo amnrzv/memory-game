@@ -78,7 +78,7 @@ export const Game = ({ catImages, board }: GameProps) => {
 
       {isGameOver ? (
         <RestartButton onClick={() => router.reload()}>
-          Restart game
+          PLAY AGAIN?
         </RestartButton>
       ) : null}
     </Container>
@@ -88,13 +88,21 @@ export const Game = ({ catImages, board }: GameProps) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 4rem;
+  margin: 1rem;
+
+  @media (min-width: 30rem) {
+    margin: 4rem;
+  }
 `;
 
 const GameBoard = styled.main`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 2rem;
+  gap: 0.5rem;
+
+  @media (min-width: 30rem) {
+    gap: 2rem;
+  }
 `;
 
 const ScoreBoard = styled.aside`
@@ -104,16 +112,16 @@ const ScoreBoard = styled.aside`
 
 const RestartButton = styled.button`
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   width: fit-content;
   cursor: pointer;
   display: block;
-  font-size: 4rem;
-  padding: 2rem;
-  background: #894127;
+  font-size: 3rem;
+  padding: 1.5rem;
+  background: var(--btn-bg);
   border: none;
-  border-radius: 1rem;
+  border-radius: var(--border-radius);
   color: #e5c1b3;
   transform: translate(-50%, -50%) rotateZ(-5deg);
 
@@ -121,5 +129,11 @@ const RestartButton = styled.button`
   :focus {
     transform: translate(-50%, -50%) scale(1.03) rotateZ(-5deg);
     color: #eee;
+  }
+
+  @media (min-width: 30rem) {
+    font-size: 5rem;
+    padding: 2rem;
+    top: 50%;
   }
 `;

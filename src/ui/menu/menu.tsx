@@ -19,35 +19,53 @@ const Container = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 2rem;
+
+  @media (min-width: 30rem) {
+    margin: 0 4rem;
+  }
 `;
 
 const Header = styled.h1`
-  font-size: 10rem;
-  margin: 0 auto;
-  padding-block: 1.5rem;
-  width: fit-content;
+  font-size: 4rem;
+  margin: 0.5rem;
+
+  @media (min-width: 30rem) {
+    font-size: 8rem;
+  }
 `;
 
 const Info = styled.p`
-  font-size: 1.5rem;
-  margin: 0 auto;
+  font-size: 1rem;
+  text-align: center;
   color: #777;
+
+  @media (min-width: 30rem) {
+    font-size: 1.5rem;
+  }
 `;
 
 const StartLink = styled(Link)`
-  display: block;
-  font-size: 4rem;
-  padding: 2rem;
-  background: #894127;
+  display: inline-block;
+  font-size: 3rem;
+  padding: 1.5rem;
+  background: var(--btn-bg);
   border: none;
-  border-radius: 1rem;
+  border-radius: var(--border-radius);
   color: #e5c1b3;
 
-  margin-top: 4rem;
+  margin-top: 2rem;
+  transform: rotateZ(-5deg);
 
   :hover,
   :focus {
-    transform: scale(1.03);
+    transform: scale(1.03) rotateZ(-5deg);
     color: #eee;
+  }
+
+  @media (min-width: 30rem) {
+    font-size: 5rem;
+    padding: 2rem;
+    margin-top: 4rem;
   }
 `;

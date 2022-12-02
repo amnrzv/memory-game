@@ -37,24 +37,26 @@ export const Card = ({
 
 const CardSlot = styled.button`
   font-size: 3rem;
-  height: 18vh;
+  height: var(--card-height);
   padding: 0;
   cursor: pointer;
-  border: solid 1px coral;
+  border: solid 1px var(--theme-colour);
+  border-radius: var(--border-radius);
   overflow: hidden;
 
-  background: #ffc0cb09;
+  background: var(--theme-colour-bg);
 
   :hover,
   :focus-visible {
-    box-shadow: 0 0 10px 0px coral;
+    box-shadow: 0 0 10px 0px var(--theme-colour);
     transform: scale(1.03);
   }
 `;
 
 const EmptyCardSlot = styled.div`
-  height: 18vh;
-  border: solid 1px #6c595992;
+  height: var(--card-height);
+  border: solid 1px var(--empty-card-border);
+  border-radius: var(--border-radius);
 `;
 
 interface CardWrapperProps {
