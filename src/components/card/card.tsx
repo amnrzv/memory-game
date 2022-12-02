@@ -8,20 +8,6 @@ interface CardProps {
   onClickHandler: (id: number) => void;
 }
 
-const renderImageOrBackupText = (
-  isRevealed: boolean,
-  value: string,
-  imgUrl?: string
-) => {
-  if (!imgUrl && isRevealed) {
-    return <CardText>{value}</CardText>;
-  }
-
-  return (
-    <CardImage src={imgUrl} alt={`cat ${value}`} isRevealed={isRevealed} />
-  );
-};
-
 export const Card = ({
   id,
   imgUrl,
@@ -30,28 +16,31 @@ export const Card = ({
   onClickHandler,
 }: CardProps) => {
   return (
-    <CardWrapper
-      data-testid="card"
-      tabIndex={0}
-      onClick={() => {
-        onClickHandler(id);
-      }}
-    >
-      {renderImageOrBackupText(isRevealed, value, imgUrl)}
-    </CardWrapper>
+    <CardSlot>
+      <CardWrapper
+        data-testid="card"
+        tabIndex={0}
+        onClick={() => {
+          onClickHandler(id);
+        }}
+        imgUrl={imgUrl}
+        isRevealed={isRevealed}
+      >
+        {isRevealed ? <CardText>{value}</CardText> : null}
+      </CardWrapper>
+    </CardSlot>
   );
 };
 
-const CardWrapper = styled.div`
+const CardSlot = styled.div`
   font-size: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 10rem;
   width: calc(100vw / 4 - 4rem);
-  border: solid 2px coral;
+  border: solid 1px coral;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0 0 12px 0px inset coral;
+  background: #ffc0cb09;
 
   :hover,
   :focus {
@@ -60,12 +49,28 @@ const CardWrapper = styled.div`
   }
 `;
 
-const CardImage = styled.img<{ isRevealed: boolean }>`
+interface CardWrapperProps {
+  imgUrl?: string;
+  isRevealed: boolean;
+}
+
+const CardWrapper = styled.div<CardWrapperProps>`
+  position: relative;
   height: 100%;
+  width: 100%;
+  background: ${({ imgUrl }) => `url(${imgUrl})` || ""};
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-size: 3rem;
 
   // to kick off image loading immediately
   // instead of loading on reveal
   opacity: ${({ isRevealed }) => (isRevealed ? 1 : 0)};
 `;
 
-const CardText = styled.div``;
+// Backup in case an image isn't loaded
+const CardText = styled.p`
+  position: absolute;
+  z-index: -1;
+`;
