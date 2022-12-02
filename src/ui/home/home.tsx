@@ -20,21 +20,22 @@ export const Home = ({ catImages, board }: HomeProps) => {
     }
 
     if (board[firstCard] === board[secondCard]) {
-      setRevealed((currentRevealedList) => [
-        ...currentRevealedList,
-        firstCard,
-        secondCard,
-      ]);
-
-      setFirstCard(null);
-      setSecondCard(null);
+      setTimeout(() => {
+        setRevealed((currentRevealedList) => [
+          ...currentRevealedList,
+          firstCard,
+          secondCard,
+        ]);
+        setFirstCard(null);
+        setSecondCard(null);
+      }, 600);
       return;
     }
 
     setTimeout(() => {
       setFirstCard(null);
       setSecondCard(null);
-    }, 800);
+    }, 600);
   }, [board, firstCard, secondCard]);
 
   const onCardClicked = (id: number) => {
@@ -51,11 +52,8 @@ export const Home = ({ catImages, board }: HomeProps) => {
       <GameBoard>
         {board.map((value, index) => (
           <Card
-            isRevealed={
-              index === firstCard ||
-              index === secondCard ||
-              revealedList.includes(index)
-            }
+            isFlipped={index === firstCard || index === secondCard}
+            isRevealed={revealedList.includes(index)}
             id={index}
             imgUrl={catImages.length > value ? catImages[value].url : ""}
             value={value.toString()}

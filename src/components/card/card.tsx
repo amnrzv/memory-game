@@ -4,6 +4,7 @@ interface CardProps {
   id: number;
   imgUrl?: string;
   value: string;
+  isFlipped: boolean;
   isRevealed: boolean;
   onClickHandler: (id: number) => void;
 }
@@ -12,9 +13,14 @@ export const Card = ({
   id,
   imgUrl,
   value,
+  isFlipped,
   isRevealed,
   onClickHandler,
 }: CardProps) => {
+  if (isRevealed) {
+    return <EmptyCardSlot data-testid="empty-card-slot" />;
+  }
+
   return (
     <CardSlot>
       <CardWrapper
@@ -24,9 +30,9 @@ export const Card = ({
           onClickHandler(id);
         }}
         imgUrl={imgUrl}
-        isRevealed={isRevealed}
+        isFlipped={isFlipped}
       >
-        {isRevealed ? <CardText>{value}</CardText> : null}
+        {isFlipped ? <CardText>{value}</CardText> : null}
       </CardWrapper>
     </CardSlot>
   );
@@ -39,7 +45,7 @@ const CardSlot = styled.div`
   border: solid 1px coral;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: 0 0 12px 0px inset coral;
+
   background: #ffc0cb09;
 
   :hover,
@@ -49,9 +55,15 @@ const CardSlot = styled.div`
   }
 `;
 
+const EmptyCardSlot = styled.div`
+  height: 10rem;
+  width: calc(100vw / 4 - 4rem);
+  border: solid 1px #6c595992;
+`;
+
 interface CardWrapperProps {
   imgUrl?: string;
-  isRevealed: boolean;
+  isFlipped: boolean;
 }
 
 const CardWrapper = styled.div<CardWrapperProps>`
@@ -66,7 +78,7 @@ const CardWrapper = styled.div<CardWrapperProps>`
 
   // to kick off image loading immediately
   // instead of loading on reveal
-  opacity: ${({ isRevealed }) => (isRevealed ? 1 : 0)};
+  opacity: ${({ isFlipped }) => (isFlipped ? 1 : 0)};
 `;
 
 // Backup in case an image isn't loaded

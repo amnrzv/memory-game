@@ -35,7 +35,7 @@ describe("Home page", () => {
     expect(queryByText(/[0-7]/)).not.toBeNull();
   });
 
-  it("should keep the cards revealed if match found", async () => {
+  it("should remove the cards from the board and leave an empty car slot if match found", async () => {
     const user = userEvent.setup();
 
     const { getAllByTestId, queryAllByText } = render(
@@ -48,7 +48,9 @@ describe("Home page", () => {
     await user.click(cardOne);
     await user.click(cardTwo);
 
-    expect(queryAllByText("0")).toHaveLength(2);
+    await waitFor(() => {
+      expect(getAllByTestId("empty-card-slot")).toHaveLength(2);
+    });
   });
 
   it("should hide the cards if match not found", async () => {
