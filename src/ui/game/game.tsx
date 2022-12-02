@@ -48,7 +48,6 @@ export const Game = ({ catImages, board }: GameProps) => {
 
   return (
     <Container>
-      <Header>Memory game</Header>
       <GameBoard>
         {board.map((value, index) => (
           <Card
@@ -66,14 +65,8 @@ export const Game = ({ catImages, board }: GameProps) => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.main`
   width: 100%;
-`;
-
-const Header = styled.h1`
-  width: fit-content;
-  margin: 0 auto;
-  padding-block: 1.5rem;
 `;
 
 const GameBoard = styled.div`

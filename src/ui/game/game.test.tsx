@@ -6,14 +6,6 @@ import { Game } from "./game";
 const shuffledBoard = [5, 4, 2, 2, 1, 5, 0, 3, 3, 7, 6, 6, 0, 1, 7, 4];
 
 describe("Game page", () => {
-  it("should render the header", () => {
-    const { getByRole } = render(<Game catImages={[]} board={shuffledBoard} />);
-
-    expect(getByRole("heading", { level: 1 })).toHaveTextContent(
-      /memory game/i
-    );
-  });
-
   it("should render the cards", () => {
     const { getAllByTestId } = render(
       <Game catImages={[]} board={shuffledBoard} />
