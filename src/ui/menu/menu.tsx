@@ -21,7 +21,7 @@ const Container = styled.main`
   align-items: center;
   margin: 0 2rem;
 
-  @media (min-width: 30rem) {
+  @media (min-width: 40rem) {
     margin: 0 4rem;
   }
 `;
@@ -30,7 +30,7 @@ const Header = styled.h1`
   font-size: 4rem;
   margin: 0.5rem;
 
-  @media (min-width: 30rem) {
+  @media (min-width: 40rem) {
     font-size: 8rem;
   }
 `;
@@ -40,7 +40,7 @@ const Info = styled.p`
   text-align: center;
   color: #777;
 
-  @media (min-width: 30rem) {
+  @media (min-width: 40rem) {
     font-size: 1.5rem;
   }
 `;
@@ -63,7 +63,7 @@ const StartLink = styled(Link)`
     color: #eee;
   }
 
-  @media (min-width: 30rem) {
+  @media (min-width: 40rem) {
     font-size: 5rem;
     padding: 2rem;
     margin-top: 4rem;

@@ -100,9 +100,10 @@ export const Game = ({ catImages, board }: GameProps) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 1rem;
 
-  @media (min-width: 30rem) {
+  @media (min-width: 40rem) {
     margin: 4rem;
   }
 `;
@@ -111,8 +112,10 @@ const GameBoard = styled.main`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 0.5rem;
+  width: 100%;
+  max-width: 60rem;
 
-  @media (min-width: 30rem) {
+  @media (min-width: 40rem) {
     gap: 2rem;
   }
 `;
@@ -143,7 +146,7 @@ const RestartButton = styled.button`
     color: #eee;
   }
 
-  @media (min-width: 30rem) {
+  @media (min-width: 40rem) {
     font-size: 5rem;
     padding: 2rem;
     top: 50%;

@@ -38,6 +38,7 @@ export const Card = ({
 const CardSlot = styled.button`
   font-size: 3rem;
   height: var(--card-height);
+  /* min-width: var(--card-width); */
   padding: 0;
   cursor: pointer;
   border: solid 1px var(--theme-colour);
@@ -55,6 +56,7 @@ const CardSlot = styled.button`
 
 const EmptyCardSlot = styled.div`
   height: var(--card-height);
+  /* min-width: var(--card-width); */
   border: solid 1px var(--empty-card-border);
   border-radius: var(--border-radius);
 `;
