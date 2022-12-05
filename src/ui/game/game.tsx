@@ -27,8 +27,10 @@ export const Game = ({ catImages, board }: GameProps) => {
       return;
     }
 
+    let flipTimeout: NodeJS.Timeout;
+    let revealTimeout: NodeJS.Timeout;
     if (board[firstCard] === board[secondCard]) {
-      setTimeout(() => {
+      revealTimeout = setTimeout(() => {
         setRevealed((currentRevealedList) => [
           ...currentRevealedList,
           firstCard,
@@ -40,10 +42,20 @@ export const Game = ({ catImages, board }: GameProps) => {
       return;
     }
 
-    setTimeout(() => {
+    flipTimeout = setTimeout(() => {
       setFirstCard(null);
       setSecondCard(null);
     }, DELAY_BEFORE_FLIP_BACK_IN_MS);
+
+    return () => {
+      if (revealTimeout) {
+        clearTimeout(revealTimeout);
+      }
+
+      if (flipTimeout) {
+        clearTimeout(flipTimeout);
+      }
+    };
   }, [board, firstCard, secondCard]);
 
   const onCardClicked = (id: number) => {
