@@ -13,8 +13,3 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Memory game
 
 This is a basic "pairs" memory game built using Next.js and the CAT Api!
-
-Built specifically for the Craft docs tech assessment.
-
-More thoughts here:
-https://www.craft.do/s/SwOCXhb3zfxKi3
